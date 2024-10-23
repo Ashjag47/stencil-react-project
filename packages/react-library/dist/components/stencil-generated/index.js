@@ -1,0 +1,12 @@
+'use client';
+import { createComponent } from '@stencil/react-output-target/runtime';
+import React from 'react';
+import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "stencil-library/my-component";
+export const MyComponent = createComponent({
+    tagName: 'my-component',
+    elementClass: MyComponentElement,
+    react: React,
+    events: {},
+    defineCustomElement: defineMyComponent
+});
+//# sourceMappingURL=index.js.map
