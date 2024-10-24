@@ -7,13 +7,24 @@
 
 /* eslint-disable */
 
-import type { StencilReactComponent } from '@stencil/react-output-target/runtime';
+import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
 import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
+import { MyButton as MyButtonElement, defineCustomElement as defineMyButton } from "stencil-library/my-button";
 import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "stencil-library/my-component";
 
-type MyComponentEvents = NonNullable<unknown>;
+type MyButtonEvents = { onButtonClick: EventName<CustomEvent<any>> };
 
+export const MyButton: StencilReactComponent<MyButtonElement, MyButtonEvents> = /*@__PURE__*/ createComponent<MyButtonElement, MyButtonEvents>({
+    tagName: 'my-button',
+    elementClass: MyButtonElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: { onButtonClick: 'buttonClick' } as MyButtonEvents,
+    defineCustomElement: defineMyButton
+});
+
+type MyComponentEvents = NonNullable<unknown>;
 
 export const MyComponent: StencilReactComponent<MyComponentElement, MyComponentEvents> = /*@__PURE__*/ createComponent<MyComponentElement, MyComponentEvents>({
     tagName: 'my-component',
